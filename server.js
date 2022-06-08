@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const MongoClient = require('mongodb').MongoClient;
 const PORT = process.env.PORT || 8000;
 
@@ -14,6 +15,7 @@ MongoClient.connect(process.env.MONGO_URL)
     app.set('views', __dirname + '/views');
     app.use(express.urlencoded({extended: true}));
     app.use(express.json());
+    app.use(cors());
 
     app.get('/', (req,res)=>{
         res.render("index.ejs")
