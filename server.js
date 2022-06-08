@@ -1,11 +1,14 @@
-require('dotenv').config();
+if(process.env.NODE_ENV !== 'production'){
+    require('dotenv').config();
+}
+
 const express = require('express');
 const app = express();
 const cors = require('cors');
 const MongoClient = require('mongodb').MongoClient;
 const PORT = process.env.PORT || 8000;
 
-MongoClient.connect(process.env.MONGO_URL)
+MongoClient.connect(process.env.MONGO_URL, {useUnifiedTopology:true, useNewUrlParser:true})
 .then(client => {
 
     db = client.db('smash');
