@@ -12,7 +12,9 @@ MongoClient.connect(process.env.MONGO_URL)
     console.log('Connected to Database');
     app.set('view engine', "ejs");
     app.set('views', __dirname + '/views');
-    
+    app.use(express.urlencoded({extended: true}));
+    app.use(express.json());
+
     app.get('/', (req,res)=>{
         res.render("index.ejs")
     })
@@ -45,7 +47,7 @@ MongoClient.connect(process.env.MONGO_URL)
                 })
             }
            else{
-               res.send("Not a fighter Idiot")
+               res.send("Not a Fighter/ Not Yet Added")
            }
         }).catch(err => console.error(err));
     })
